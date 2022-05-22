@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    Dashboard
+                    Witaj!
                 </div>
 
                 <div class="card-body">
@@ -15,7 +15,9 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    
+                    Zalogowano jako  {{Auth::user()->name}}
+                    
                 </div>
             </div>
         </div>

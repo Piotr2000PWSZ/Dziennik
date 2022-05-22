@@ -4,10 +4,8 @@
         <ul class="nav">
             <li class="nav-item">
                 <a href="{{ route("admin.home") }}" class="nav-link">
-                    <i class="nav-icon fas fa-fw fa-tachometer-alt">
-
-                    </i>
-                    {{ trans('global.dashboard') }}
+                    
+                    Menu
                 </a>
             </li>
             @can('user_management_access')
@@ -16,7 +14,7 @@
                         <i class="fa-fw fas fa-users nav-icon">
 
                         </i>
-                        {{ trans('cruds.userManagement.title') }}
+                        Zarządzanie
                     </a>
                     <ul class="nav-dropdown-items">
                         @can('permission_access')
@@ -25,7 +23,7 @@
                                     <i class="fa-fw fas fa-unlock-alt nav-icon">
 
                                     </i>
-                                    {{ trans('cruds.permission.title') }}
+                                    Uprawnienia
                                 </a>
                             </li>
                         @endcan
@@ -35,7 +33,7 @@
                                     <i class="fa-fw fas fa-briefcase nav-icon">
 
                                     </i>
-                                    {{ trans('cruds.role.title') }}
+                                    Role
                                 </a>
                             </li>
                         @endcan
@@ -45,7 +43,7 @@
                                     <i class="fa-fw fas fa-user nav-icon">
 
                                     </i>
-                                    {{ trans('cruds.user.title') }}
+                                    Użytkownicy
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -53,7 +51,7 @@
                                     <i class="fa-fw fas fa-user nav-icon">
 
                                     </i>
-                                    Teachers
+                                    Nauczyciele
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -61,7 +59,7 @@
                                     <i class="fa-fw fas fa-user nav-icon">
 
                                     </i>
-                                    Students
+                                    Uczniowie
                                 </a>
                             </li>
                         @endcan
@@ -74,7 +72,7 @@
                         <i class="fa-fw fas fa-school nav-icon">
 
                         </i>
-                        {{ trans('cruds.schoolClass.title') }}
+                        Klasy
                     </a>
                 </li>
             @endcan
@@ -84,7 +82,7 @@
                         <i class="fa-fw fas fa-clock nav-icon">
 
                         </i>
-                        {{ trans('cruds.lesson.title') }}
+                        Lekcje
                     </a>
                 </li>
             @endcan
@@ -93,7 +91,7 @@
                     <i class="fa-fw fas fa-calendar nav-icon">
 
                     </i>
-                    Calendar
+                    Plan zajęć
                 </a>
             </li>
             <li class="nav-item">
@@ -101,7 +99,7 @@
                     <i class="nav-icon fas fa-fw fa-sign-out-alt">
 
                     </i>
-                    {{ trans('global.logout') }}
+                    Wyloguj
                 </a>
             </li>
         </ul>
