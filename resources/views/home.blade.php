@@ -16,7 +16,7 @@
                     @endif
 
                     
-                    Zalogowano jako  {{Auth::user()->name}}
+                    Witaj {{Auth::user()->name}}
                     
                 </div>
             </div>
