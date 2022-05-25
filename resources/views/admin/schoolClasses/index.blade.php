@@ -1,25 +1,23 @@
 @extends('layouts.admin')
 @section('content')
-@can('user_create')
+@can('school_class_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.users.create") }}">
-                Dodaj użytkownika
-            </a>
-            <a class="btn btn-success" href="{{ route("admin.users.create") }}?student">
-                Dodaj ucznia
+            <a class="btn btn-success" href="{{ route("admin.school-classes.create") }}">
+                Dodaj klasę
+
             </a>
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        Lista użytkowników
+        Istniejące klasy
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-User">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-SchoolClass">
                 <thead>
                     <tr>
                         <th width="10">
@@ -29,22 +27,10 @@
                             ID
                         </th>
                         <th>
-                            Nazwa
-                        </th>
-                        <th>
-                            Adres e-mail
-                        </th>
-                        <th>
-                            E-mail zweryfikowano
-                        </th>
-                        <th>
-                            Rola
-                        </th>
-                        <th>
                             Klasa
                         </th>
                         <th>
-                            Rodzic
+                            Harmonogram
                         </th>
                         <th>
                             &nbsp;
@@ -52,42 +38,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $key => $user)
-                        <tr data-entry-id="{{ $user->id }}">
+                    @foreach($schoolClasses as $key => $schoolClass)
+                        <tr data-entry-id="{{ $schoolClass->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $user->id ?? '' }}
+                                {{ $schoolClass->id ?? '' }}
                             </td>
                             <td>
-                                {{ $user->name ?? '' }}
+                                {{ $schoolClass->name ?? '' }}
                             </td>
                             <td>
-                                {{ $user->email ?? '' }}
+                                <a href="{{ route('admin.calendar.index') }}?class_id={{ $schoolClass->id }}">Zobacz harmonogram</a>
                             </td>
                             <td>
-                                {{ $user->email_verified_at ?? '' }}
-                            </td>
-                            <td>
-                                @foreach($user->roles as $key => $item)
-                                    <span class="badge badge-info">{{ $item->title }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                {{ $user->class->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $user->parent_id ?? ''}}
-                            </td>
-                            <td>
-                                
-                               
+                                @can('school_class_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.school-classes.show', $schoolClass->id) }}">
+                                        Zobacz
+                                    </a>
+                                @endcan
 
-                               
+                                @can('school_class_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.school-classes.edit', $schoolClass->id) }}">
+                                        Edytuj
+                                    </a>
+                                @endcan
 
-                                @can('user_delete')
-                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Jesteś pewny?');" style="display: inline-block;">
+                                @can('school_class_delete')
+                                    <form action="{{ route('admin.school-classes.destroy', $schoolClass->id) }}" method="POST" onsubmit="return confirm('Jesteś pewny?');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="Usuń">
@@ -112,11 +91,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('user_delete')
+@can('school_class_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.users.massDestroy') }}",
+    url: "{{ route('admin.school-classes.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -129,7 +108,7 @@
         return
       }
 
-      if (confirm('{{ trans('global.areYouSure') }}')) {
+      if (confirm('Jesteś pewny?')) {
         $.ajax({
           headers: {'x-csrf-token': _token},
           method: 'POST',
@@ -146,7 +125,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  $('.datatable-User:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable-SchoolClass:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();

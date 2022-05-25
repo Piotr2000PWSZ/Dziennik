@@ -37,7 +37,8 @@ class UsersController extends Controller
 
         $classes = SchoolClass::all()->pluck('name', 'id')->prepend('Wybierz', '');
 
-        return view('admin.users.create', compact('roles', 'classes'));
+        $parents = User::all()->pluck('name', 'id')->prepend('Wybierz', '');
+        return view('admin.users.create', compact('roles', 'classes', 'parents'));
     }
 
     public function store(StoreUserRequest $request)
