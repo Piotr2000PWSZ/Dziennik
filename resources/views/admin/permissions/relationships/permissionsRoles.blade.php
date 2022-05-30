@@ -1,22 +1,21 @@
-@extends('layouts.admin')
-@section('content')
-@can('lesson_create')
+@can('role_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.lessons.create") }}">
-                Utwórz lekcję
+            <a class="btn btn-success" href="{{ route("admin.roles.create") }}">
+                Lista uprawnień przypisanych rolom
             </a>
         </div>
     </div>
 @endcan
+
 <div class="card">
     <div class="card-header">
-        Informacje o lekcjach
+        Lista
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Lesson">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-Role">
                 <thead>
                     <tr>
                         <th width="10">
@@ -26,19 +25,10 @@
                             ID
                         </th>
                         <th>
-                            Klasa
+                            Nazwa roli
                         </th>
                         <th>
-                            Nauczyciel
-                        </th>
-                        <th>
-                            Dzień tygodnia
-                        </th>
-                        <th>
-                            Godzina rozpoczęcia
-                        </th>
-                        <th>
-                            Godzina zakończenia
+                            Uprawnienia
                         </th>
                         <th>
                             &nbsp;
@@ -46,44 +36,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($lessons as $key => $lesson)
-                        <tr data-entry-id="{{ $lesson->id }}">
+                    @foreach($roles as $key => $role)
+                        <tr data-entry-id="{{ $role->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $lesson->id ?? '' }}
+                                {{ $role->id ?? '' }}
                             </td>
                             <td>
-                                {{ $lesson->class->name ?? '' }}
+                                {{ $role->title ?? '' }}
                             </td>
                             <td>
-                                {{ $lesson->teacher->name ?? '' }}
+                                @foreach($role->permissions as $key => $item)
+                                    <span class="badge badge-info">{{ $item->title }}</span>
+                                @endforeach
                             </td>
                             <td>
-                                {{ $lesson->weekday ?? '' }}
-                            </td>
-                            <td>
-                                {{ $lesson->start_time ?? '' }}
-                            </td>
-                            <td>
-                                {{ $lesson->end_time ?? '' }}
-                            </td>
-                            <td>
-                                @can('lesson_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.lessons.show', $lesson->id) }}">
-                                        Zobacz
-                                    </a>
-                                @endcan
 
-                                @can('lesson_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.lessons.edit', $lesson->id) }}">
-                                        Edytuj
-                                    </a>
-                                @endcan
 
-                                @can('lesson_delete')
-                                    <form action="{{ route('admin.lessons.destroy', $lesson->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('role_delete')
+                                    <form action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('Jesteś pewny?');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="Usuń">
@@ -100,19 +73,16 @@
     </div>
 </div>
 
-
-
-@endsection
 @section('scripts')
 @parent
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('lesson_delete')
+@can('role_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.lessons.massDestroy') }}",
+    url: "{{ route('admin.roles.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -142,7 +112,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  $('.datatable-Lesson:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable-Role:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();

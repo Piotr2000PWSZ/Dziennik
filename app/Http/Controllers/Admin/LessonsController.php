@@ -12,6 +12,7 @@ use App\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
 
 class LessonsController extends Controller
 {
@@ -31,6 +32,9 @@ class LessonsController extends Controller
         $classes = SchoolClass::all()->pluck('name', 'id')->prepend('Wybierz', '');
 
         $teachers = User::all()->pluck('name', 'id')->prepend('Wybierz', '');
+
+        //$teachers = DB::select('SELECT * FROM users u JOIN role_user r ON u.id=r.user_id WHERE r.role_id=3');
+        
 
         return view('admin.lessons.create', compact('classes', 'teachers'));
     }

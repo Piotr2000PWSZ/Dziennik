@@ -129,7 +129,7 @@
         return
       }
 
-      if (confirm('{{ trans('global.areYouSure') }}')) {
+      if (confirm('Jesteś pewny?')) {
         $.ajax({
           headers: {'x-csrf-token': _token},
           method: 'POST',

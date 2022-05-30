@@ -12,5 +12,9 @@ class AddRelationshipFieldsToUsersTable extends Migration
             $table->unsignedInteger('class_id')->nullable();
             $table->foreign('class_id', 'class_fk_1001550')->references('id')->on('school_classes');
         });
+        Schema::table('users', function(Blueprint $table){
+            $table->unsignedInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('users');
+        });
     }
 }
