@@ -1,8 +1,9 @@
 <?php
 
-use App\Lesson;
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
+use App\Lesson;
 class LessonsTableSeeder extends Seeder
 {
     /**
