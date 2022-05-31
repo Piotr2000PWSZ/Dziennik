@@ -70,14 +70,14 @@
                     </div>
                 @endif
                 <div class="form-group">
-                <label for="parent_id">Rodzic</label>
-                <select class="form-control select2 {{ $errors->has('parent') ? 'is-invalid' : '' }}" name="parent_id" id="parent_id" required>
-                    @foreach($parents as $id => $parent)
-                        <option value="{{ $id }}" {{ old('parent_id') == $id ? 'selected' : '' }}>{{ $parent }}</option>
+                    <label for="parent_id">Rodzic</label>
+                    <select class="form-control select2 {{ $errors->has('parent') ? 'is-invalid' : '' }}" name="parent_id" id="parent_id" >
+                        @foreach($parents as $id => $parent)
+                            <option value="{{ $id }}" {{ old('parent_id') == $id ? 'selected' : '' }}>{{ $parent }}</option>
 
-                    @endforeach
-                </select>
-            </div>
+                        @endforeach
+                    </select>  
+                </div>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

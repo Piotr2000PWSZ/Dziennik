@@ -9,6 +9,9 @@
             <a class="btn btn-success" href="{{ route("admin.users.create") }}?student">
                 Dodaj ucznia
             </a>
+       
+            
+
         </div>
     </div>
 @endcan
@@ -81,10 +84,17 @@
                                 {{ $user->parent_id ?? ''}}
                             </td>
                             <td>
-                                
-                               
+                                @can('user_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.users.show', $user->id) }}">
+                                        {{ trans('Dane') }}
+                                    </a>
+                                @endcan
 
-                               
+                                 @can('user_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.users.edit', $user->id) }}">
+                                        {{ trans('Edytuj') }}
+                                    </a>
+                                @endcan
 
                                 @can('user_delete')
                                     <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Jesteś pewny?');" style="display: inline-block;">
