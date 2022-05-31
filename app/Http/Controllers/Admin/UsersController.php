@@ -48,8 +48,28 @@ class UsersController extends Controller
 
         return redirect()->route('admin.users.index');
     }
-
     
+    public function edit(User $user)
+    {
+        abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $roles = Role::all()->pluck('title', 'id');
+
+        $classes = SchoolClass::all()->pluck('name', 'id')->prepend('Wybierz', '');
+
+        $user->load('roles', 'class');
+
+        return view('admin.users.edit', compact('roles', 'classes', 'user'));
+    }
+    
+    public function show(User $user)
+    {
+        abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $user->load('roles', 'class', 'teacherLessons');
+
+        return view('admin.users.show', compact('user'));
+    }
 
     public function update(UpdateUserRequest $request, User $user)
     {
