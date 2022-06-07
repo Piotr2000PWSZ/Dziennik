@@ -11,8 +11,13 @@ class CreateSchoolClassesTable extends Migration
         Schema::create('school_classes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->unsignedInteger('tutor')->nullable();
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('school_classes', function (Blueprint $table){
+            $table->foreign('tutor')->references('id')->on('users');
         });
     }
 }

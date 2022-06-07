@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateLessonRequest;
 use App\Lesson;
 use App\SchoolClass;
 use App\User;
+use App\Przedmioty;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,8 +22,9 @@ class LessonsController extends Controller
         abort_if(Gate::denies('lesson_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $lessons = Lesson::all();
+        $przedmiot = Przedmioty::all();
 
-        return view('admin.lessons.index', compact('lessons'));
+        return view('admin.lessons.index', compact('lessons', 'przedmiot'));
     }
 
     public function create()

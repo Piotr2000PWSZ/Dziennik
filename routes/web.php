@@ -37,6 +37,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('school-classes', 'SchoolClassesController');
 
     Route::get('calendar', 'CalendarController@index')->name('calendar.index');
+
+    // Obecność
+    //Route::get('attendance', 'AttendanceController');
+
+    Route::resource('attendance', 'AttendanceController' );
     
 });
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

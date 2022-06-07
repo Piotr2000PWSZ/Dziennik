@@ -35,10 +35,19 @@
                             Dzień tygodnia
                         </th>
                         <th>
+                            Tydzień
+                        </th>
+                        <th>
                             Godzina rozpoczęcia
                         </th>
                         <th>
                             Godzina zakończenia
+                        </th>
+                        <th>
+                            Obecność
+                        </th>
+                        <th>
+                            Przedmiot
                         </th>
                         <th>
                             &nbsp;
@@ -64,10 +73,22 @@
                                 {{ $lesson->weekday ?? '' }}
                             </td>
                             <td>
+                                {{ $lesson->week_number ?? '' }}
+                            </td>
+                            
+                            <td>
                                 {{ $lesson->start_time ?? '' }}
                             </td>
                             <td>
                                 {{ $lesson->end_time ?? '' }}
+                            </td>
+                            <td>
+                            <a class="btn btn-xs btn-primary" href="{{ route('admin.attendance.index', $lesson->id) }}">
+                                Lista obecności
+                            </a>
+                            </td>
+                            <td>
+                                {{ $lesson->przedmiot->nazwa ?? ''}}
                             </td>
                             <td>
                                 @can('lesson_show')

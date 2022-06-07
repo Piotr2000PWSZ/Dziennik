@@ -20,9 +20,11 @@ class Lesson extends Model
 
     protected $fillable = [
         'weekday',
+        'week_number',
         'class_id',
         'end_time',
         'teacher_id',
+        'przedmiot_id',
         'start_time',
         'created_at',
         'updated_at',
@@ -74,6 +76,11 @@ class Lesson extends Model
     public function teacher()
     {
         return $this->belongsTo(User::class, 'teacher_id');
+    }
+
+    public function przedmiot()
+    {
+        return $this->belongsTo(Przedmioty::class, 'przedmiot_id');
     }
 
     public static function isTimeAvailable($weekday, $startTime, $endTime, $class, $teacher, $lesson)

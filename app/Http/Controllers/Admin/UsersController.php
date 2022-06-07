@@ -25,13 +25,14 @@ class UsersController extends Controller
                 });
             })
             ->get();
+        $parents = User::all();
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users', 'parents'));
     }
 
     public function create()
     {
-       // abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $roles = Role::all()->pluck('title', 'id');
 

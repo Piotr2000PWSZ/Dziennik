@@ -1,39 +1,35 @@
 @extends('layouts.admin')
 @section('content')
-@can('school_class_create')
+@can('role_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.school-classes.create") }}">
-                Dodaj klasę
-
+            <a class="btn btn-success" href="{{ route("admin.roles.create") }}">
+                Dodaj role
             </a>
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        Istniejące klasy
+        Lista 
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-SchoolClass">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-Role">
                 <thead>
                     <tr>
                         <th width="10">
 
                         </th>
                         <th>
-                            ID
+                            Id
                         </th>
                         <th>
-                            Klasa
+                            Tytuł
                         </th>
                         <th>
-                            Wychowawca
-                        </th>
-                        <th>
-                            Harmonogram
+                            Uprawnienia
                         </th>
                         <th>
                             &nbsp;
@@ -41,38 +37,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($schoolClasses as $key => $schoolClass)
-                        <tr data-entry-id="{{ $schoolClass->id }}">
+                    @foreach($roles as $key => $role)
+                        <tr data-entry-id="{{ $role->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $schoolClass->id ?? '' }}
+                                {{ $role->id ?? '' }}
                             </td>
                             <td>
-                                {{ $schoolClass->name ?? '' }}
+                                {{ $role->title ?? '' }}
                             </td>
                             <td>
-                                {{ $schollClass->tutor ?? ''}}
+                                @foreach($role->permissions as $key => $item)
+                                    <span class="badge badge-info">{{ $item->title }}</span>
+                                @endforeach
                             </td>
                             <td>
-                                <a href="{{ route('admin.calendar.index') }}?class_id={{ $schoolClass->id }}">Zobacz harmonogram</a>
-                            </td>
-                            <td>
-                                @can('school_class_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.school-classes.show', $schoolClass->id) }}">
+                                @can('role_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.roles.show', $role->id) }}">
                                         Zobacz
                                     </a>
                                 @endcan
 
-                                @can('school_class_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.school-classes.edit', $schoolClass->id) }}">
-                                        Edytuj
+                                @can('role_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.roles.edit', $role->id) }}">
+                                        Edytuj 
                                     </a>
                                 @endcan
 
-                                @can('school_class_delete')
-                                    <form action="{{ route('admin.school-classes.destroy', $schoolClass->id) }}" method="POST" onsubmit="return confirm('Jesteś pewny?');" style="display: inline-block;">
+                                @can('role_delete')
+                                    <form action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('Jesteś pewny?');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="Usuń">
@@ -97,11 +92,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('school_class_delete')
+@can('role_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.school-classes.massDestroy') }}",
+    url: "{{ route('admin.roles.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -131,7 +126,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  $('.datatable-SchoolClass:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable-Role:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();

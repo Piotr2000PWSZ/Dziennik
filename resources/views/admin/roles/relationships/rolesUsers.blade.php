@@ -1,39 +1,35 @@
-@extends('layouts.admin')
-@section('content')
-@can('school_class_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.school-classes.create") }}">
-                Dodaj klasę
 
-            </a>
-        </div>
-    </div>
-@endcan
+
 <div class="card">
     <div class="card-header">
-        Istniejące klasy
+        Lista użytkowników z przynależnych do roli
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-SchoolClass">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-User">
                 <thead>
                     <tr>
                         <th width="10">
 
                         </th>
                         <th>
-                            ID
+                            Id
+                        </th>
+                        <th>
+                            Nazwa
+                        </th>
+                        <th>
+                            E-mail
+                        </th>
+                        <th>
+                            E-mail zweryfikowano
+                        </th>
+                        <th>
+                            Przypisana rola
                         </th>
                         <th>
                             Klasa
-                        </th>
-                        <th>
-                            Wychowawca
-                        </th>
-                        <th>
-                            Harmonogram
                         </th>
                         <th>
                             &nbsp;
@@ -41,38 +37,46 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($schoolClasses as $key => $schoolClass)
-                        <tr data-entry-id="{{ $schoolClass->id }}">
+                    @foreach($users as $key => $user)
+                        <tr data-entry-id="{{ $user->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $schoolClass->id ?? '' }}
+                                {{ $user->id ?? '' }}
                             </td>
                             <td>
-                                {{ $schoolClass->name ?? '' }}
+                                {{ $user->name ?? '' }}
                             </td>
                             <td>
-                                {{ $schollClass->tutor ?? ''}}
+                                {{ $user->email ?? '' }}
                             </td>
                             <td>
-                                <a href="{{ route('admin.calendar.index') }}?class_id={{ $schoolClass->id }}">Zobacz harmonogram</a>
+                                {{ $user->email_verified_at ?? '' }}
                             </td>
                             <td>
-                                @can('school_class_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.school-classes.show', $schoolClass->id) }}">
+                                @foreach($user->roles as $key => $item)
+                                    <span class="badge badge-info">{{ $item->title }}</span>
+                                @endforeach
+                            </td>
+                            <td>
+                                {{ $user->class->name ?? '' }}
+                            </td>
+                            <td>
+                                @can('user_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.users.show', $user->id) }}">
                                         Zobacz
                                     </a>
                                 @endcan
 
-                                @can('school_class_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.school-classes.edit', $schoolClass->id) }}">
+                                @can('user_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.users.edit', $user->id) }}">
                                         Edytuj
                                     </a>
                                 @endcan
 
-                                @can('school_class_delete')
-                                    <form action="{{ route('admin.school-classes.destroy', $schoolClass->id) }}" method="POST" onsubmit="return confirm('Jesteś pewny?');" style="display: inline-block;">
+                                @can('user_delete')
+                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Jesteś pewny?');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="Usuń">
@@ -89,19 +93,16 @@
     </div>
 </div>
 
-
-
-@endsection
 @section('scripts')
 @parent
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('school_class_delete')
+@can('user_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.school-classes.massDestroy') }}",
+    url: "{{ route('admin.users.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -131,7 +132,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  $('.datatable-SchoolClass:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable-User:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();

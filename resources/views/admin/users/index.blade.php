@@ -80,9 +80,12 @@
                             <td>
                                 {{ $user->class->name ?? '' }}
                             </td>
+                            
+
                             <td>
-                                {{ $user->parent_id ?? ''}}
+                                {{ $user->parents->name ?? ''}}
                             </td>
+
                             <td>
                                 @can('user_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.users.show', $user->id) }}">

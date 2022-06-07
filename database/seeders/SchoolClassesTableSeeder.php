@@ -15,7 +15,7 @@ class SchoolClassesTableSeeder extends Seeder
         $classes = [
             [
                 'id' => 1,
-                'name' => '1 klasa'
+                'name' => '1 klasa',
             ],
             [
                 'id' => 2,
