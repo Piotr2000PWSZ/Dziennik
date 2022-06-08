@@ -74,4 +74,24 @@ class SchoolClassesController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+    public function get_1klasa_Attribute()
+    {
+        return $this->roles()->where('id', 1)->exists();
+    }
+
+    public function get_2klasa_Attribute()
+    {
+        return $this->roles()->where('id', 2)->exists();
+    }
+
+    public function get_3klasa_Attribute()
+    {
+        return $this->roles()->where('id', 3)->exists();
+    }
+
+    public function get4_klasaAttribute()
+    {
+        return $this->roles()->where('id', 4)->exists();
+    }
 }

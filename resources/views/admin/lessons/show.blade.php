@@ -58,6 +58,22 @@
                             {{ $lesson->end_time }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            Nazwa przedmiotu
+                        </th>
+                        <td>
+                            {{ $lesson->przedmiot->nazwa ?? ''}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Temat lekcji
+                        </th>
+                        <td>
+                        {{ $lesson->przedmiot->temat ?? ''}}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

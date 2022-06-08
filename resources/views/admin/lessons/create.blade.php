@@ -45,6 +45,15 @@
                 @endif
             </div>
             <div class="form-group">
+                <label class="required" for="week_number">Numer tygodnia</label>
+                <input class="form-control {{ $errors->has('week_number') ? 'is-invalid' : '' }}" type="number" name="week_number" id="week_number" value="{{ old('week_number') }}" step="1" required>
+                @if($errors->has('weekday'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('week_number') }}
+                    </div>
+                @endif
+            </div>
+            <div class="form-group">
                 <label class="required" for="start_time">Czas rozpoczęcia</label>
                 <input class="form-control lesson-timepicker {{ $errors->has('start_time') ? 'is-invalid' : '' }}" type="text" name="start_time" id="start_time" value="{{ old('start_time') }}" required>
                 @if($errors->has('start_time'))
@@ -62,6 +71,26 @@
                     </div>
                 @endif
             </div>
+
+            <div class="form-group">
+                    <label for="przedmiot_id">Przedmiot</label>
+                    <select class="form-control select2 {{ $errors->has('przedmiot') ? 'is-invalid' : '' }}" name="przedmiot_id" id="przedmiot_id" >
+                        @foreach($lessons as $id => $lesson)
+                            <option value="{{ $id }}" {{ old('przedmiot_id') == $id ? 'selected' : '' }}>{{ $lesson->przedmiot->nazwa ?? ''}} </option>
+
+                        @endforeach
+                    </select>  
+            </div>
+            <div class="form-group">
+                    <label for="przedmiot_id">Temat</label>
+                    <select class="form-control select2 {{ $errors->has('temat') ? 'is-invalid' : '' }}" name="parent_id" id="parent_id" >
+                        @foreach($lessons as $id => $lesson)
+                            <option value="{{ $id }}" {{ old('przedmiot_id') == $id ? 'selected' : '' }}>{{ $lesson->przedmiot->temat ?? ''}} </option>
+
+                        @endforeach
+                    </select>  
+            </div>
+
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     Utwórz

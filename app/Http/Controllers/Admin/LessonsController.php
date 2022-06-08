@@ -32,13 +32,14 @@ class LessonsController extends Controller
         abort_if(Gate::denies('lesson_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $classes = SchoolClass::all()->pluck('name', 'id')->prepend('Wybierz', '');
-
+        $lessons = Lesson::all();
         $teachers = User::all()->pluck('name', 'id')->prepend('Wybierz', '');
+        $przedmioty = Przedmioty::all();
 
         //$teachers = DB::select('SELECT * FROM users u JOIN role_user r ON u.id=r.user_id WHERE r.role_id=3');
         
 
-        return view('admin.lessons.create', compact('classes', 'teachers'));
+        return view('admin.lessons.create', compact('classes', 'teachers', 'przedmioty', 'lessons'));
     }
 
     public function store(StoreLessonRequest $request)

@@ -11,7 +11,7 @@ class CreateLessonsTable extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('weekday');
-            $table->integer('week_number');
+            $table->integer('week_number')->nullable();
             $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();
