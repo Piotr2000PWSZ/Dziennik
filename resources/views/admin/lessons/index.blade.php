@@ -86,6 +86,12 @@
                             <a class="btn btn-xs btn-primary" href="{{ route('admin.attendance.index', $lesson->id) }}">
                                 Lista obecności
                             </a>
+
+                            
+
+                        
+
+
                             </td>
                             <td>
                                 {{ $lesson->przedmiot->nazwa ?? ''}}
@@ -115,6 +121,7 @@
 
                         </tr>
                     @endforeach
+                    
                 </tbody>
             </table>
         </div>

@@ -17,82 +17,54 @@ class PrzedmiotyTableSeeder extends Seeder
             [
                 'id'    => 1,
                 'nazwa' => 'Język polski',
-                'temat' => 'Wprowadzenie do pisania',
             ],
             [
                 'id'    => 2,
-                'nazwa' => 'Język polski',
-                'temat' => 'Pan Tadeusz',
+                'nazwa' => 'Matematyka',
             ],
             [
                 'id'    => 3,
-                'nazwa' => 'Język polski',
-                'temat' => 'TEMAT',
+                'nazwa' => 'Język angielski',
             ],
             [
                 'id'    => 4,
-                'nazwa' => 'Język polski',
-                'temat' => 'TEMAT',
+                'nazwa' => 'Język niemiecki',
             ],
             [
                 'id'    => 5,
-                'nazwa' => 'Język polski',
-                'temat' => 'TEMAT',
+                'nazwa' => 'Biologia',
             ],
             [
                 'id'    => 6,
-                'nazwa' => 'Język polski',
-                'temat' => 'TEMAT',
+                'nazwa' => 'Muzyka',
             ],
             [
                 'id'    => 7,
-                'nazwa' => 'Język polski',
-                'temat' => 'TEMAT',
+                'nazwa' => 'Technika',
             ],
             [
                 'id'    => 8,
-                'nazwa' => 'Język polski',
-                'temat' => 'TEMAT',
+                'nazwa' => 'Plastyka',
             ],
             [
                 'id'    => 9,
-                'nazwa' => 'Język polski',
-                'temat' => 'TEMAT',
+                'nazwa' => 'WF',
             ],
             [
                 'id'    => 10,
-                'nazwa' => 'Matematyka',
-                'temat' => 'TEMAT',
+                'nazwa' => 'Informatyka',
             ],
             [
                 'id'    => 11,
-                'nazwa' => 'Matematyka',
-                'temat' => 'TEMAT',
+                'nazwa' => 'Religia',
             ],
             [
                 'id'    => 12,
-                'nazwa' => 'Matematyka',
-                'temat' => 'TEMAT',
+                'nazwa' => 'Zajęcia wychowawcze',
             ],
             [
                 'id'    => 13,
-                'nazwa' => 'Matematyka',
-                'temat' => 'TEMAT',
-            ],
-            [
-                'id'    => 14,
-                'nazwa' => 'Język angielski',
-                'temat' => 'TEMAT',
-            ],
-            [
-                'id'    => 15,
-                'nazwa' => 'Język angielski',
-                'temat' => 'TEMAT',
-            ],
-            [
-                'id'    => 16,
-                'nazwa' => 'Język angielski',
-                'temat' => 'TEMAT',
+                'nazwa' => 'Geografia',
             ],
         ];
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePrzedmiotyTable extends Migration
+class CreateOgloszeniaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreatePrzedmiotyTable extends Migration
      */
     public function up()
     {
-        Schema::create('przedmioty', function (Blueprint $table) {
+        Schema::create('ogloszenia', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nazwa');
+            $table->string('temat');
+            $table->string('wiadomosc');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +29,6 @@ class CreatePrzedmiotyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('przedmioty');
+        Schema::dropIfExists('ogloszenia');
     }
 }
