@@ -28,6 +28,7 @@ class CalendarService
                     array_push($calendarData[$timeText], [
                         'class_name'   => $lesson->class->name,
                         'teacher_name' => $lesson->teacher->name,
+                        'przedmiot_name' => $lesson->przedmiot->nazwa,
                         'rowspan'      => $lesson->difference/30 ?? ''
                     ]);
                 }
