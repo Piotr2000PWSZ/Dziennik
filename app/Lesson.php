@@ -117,5 +117,4 @@ class Lesson extends Model
             });
     }
 
-
 }

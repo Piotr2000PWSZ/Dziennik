@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('Dane ') }} {{ trans('Osobowe Użytkownika') }}
+    Dane osobowe użytkownika
     </div>
 
     <div class="card-body">
@@ -15,7 +15,7 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('ID') }}
+                            ID
                         </th>
                         <td>
                             {{ $user->id }}
@@ -23,7 +23,7 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('Nazwa') }}
+                            Nazwa
                         </th>
                         <td>
                             {{ $user->name }}
@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('E-mail') }}
+                            E-mail
                         </th>
                         <td>
                             {{ $user->email }}
@@ -40,7 +40,7 @@
 
                     <tr>
                         <th>
-                            {{ trans('Rola') }}
+                            Rola
                         </th>
                         <td>
                             @foreach($user->roles as $key => $roles)
@@ -50,7 +50,7 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('Klasa') }}
+                            Klasa
                         </th>
                         <td>
                             {{ $user->class->name ?? '' }}
@@ -58,7 +58,7 @@
 
                         <tr>
                         <th>
-                            {{ trans('ID Rodzica') }}
+                            ID Rodzica
                         </th>
                         <td>
                             {{ $user->parent_id ?? ''}}
@@ -70,7 +70,7 @@
             </table>
             <div class="form-group">
                 <a class="btn btn-danger" href="{{ route('admin.users.index') }}">
-                    {{ trans('Powrót') }}
+                    Powrót
                 </a>
             </div>
         </div>

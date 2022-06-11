@@ -5,7 +5,11 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
+<<<<<<< HEAD
                     Calendar
+=======
+                    Plan lekcji
+>>>>>>> pawel_cet
                 </div>
 
                 <div class="card-body">
@@ -30,7 +34,11 @@
                                     </td>
                                     @foreach($days as $value)
                                         @if (is_array($value))
+<<<<<<< HEAD
                                         <td rowspan="{{ $value['rowspan'] }}" class="align-middle text-center" style="background-color:#f0f0f0">
+=======
+                                            <td rowspan="{{ $value['rowspan'] }}" class="align-middle text-center" style="background-color:#f0f0f0">
+>>>>>>> pawel_cet
                                                 {{ $value['class_name'] }}<br>
                                                 Nauczyciel: {{ $value['teacher_name'] }}<br>
                                                 Przedmiot: {{ $value['przedmiot_name'] }}

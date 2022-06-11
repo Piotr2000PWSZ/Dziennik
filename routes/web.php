@@ -42,6 +42,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //Route::get('attendance', 'AttendanceController');
 
     Route::resource('attendance', 'AttendanceController' );
+
+    // Route::get('/insert', 'AttendanceController@insert');
+    // Route::get('/edit', 'AttendanceController@edit');
+    // Route::get('/read', 'AttendanceController@read');
+    // Route::get('/delete', 'AttendanceController@delete');
+
+    //Ogłoszenia
+
+    Route::resource('ogloszenia', 'OgloszeniaController');
+
+    //Oceny
+
+    Route::resource('oceny', 'OcenyController');
     
 });
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

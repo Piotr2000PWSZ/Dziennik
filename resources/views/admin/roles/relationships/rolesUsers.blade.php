@@ -2,7 +2,7 @@
 
 <div class="card">
     <div class="card-header">
-        Lista użytkowników z przynależnych do roli
+        Lista użytkowników przynależnych do roli
     </div>
 
     <div class="card-body">

@@ -29,6 +29,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // School Classes
     Route::apiResource('school-classes', 'SchoolClassesApiController');
+
+    // Ogloszenia
+    Route::apiResource('ogloszenia', 'OgloszeniaApiController');
 });
 
 

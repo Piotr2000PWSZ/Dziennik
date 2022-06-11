@@ -231,6 +231,11 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+    'calendar' => [
+        'start_time'    => '08:00',
+        'end_time'      => '18:00',
+    ],
+
 
     'calendar' => [
         'start_time'    => '08:00',

@@ -81,15 +81,7 @@
                         @endforeach
                     </select>  
             </div>
-            <div class="form-group">
-                    <label for="przedmiot_id">Temat</label>
-                    <select class="form-control select2 {{ $errors->has('temat') ? 'is-invalid' : '' }}" name="parent_id" id="parent_id" >
-                        @foreach($lessons as $id => $lesson)
-                            <option value="{{ $id }}" {{ old('przedmiot_id') == $id ? 'selected' : '' }}>{{ $lesson->przedmiot->temat ?? ''}} </option>
-
-                        @endforeach
-                    </select>  
-            </div>
+            
 
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

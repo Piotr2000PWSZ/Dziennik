@@ -19,7 +19,6 @@ class Przedmioty extends Model
     
     protected $fillable = [
         'nazwa',
-        'temat',
     ];
 
    

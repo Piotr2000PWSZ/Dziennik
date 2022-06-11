@@ -95,6 +95,16 @@
                     </a>
                 </li>
             @endcan
+        
+                <li class="nav-item">
+                    <a href="{{ route("admin.oceny.index") }}?role=4" class="nav-link {{ request()->is('admin/lessons') || request()->is('admin/lessons/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-clock nav-icon">
+
+                        </i>
+                        Oceny
+                    </a>
+                </li>
+            
             <li class="nav-item">
                 <a href="{{ route("admin.calendar.index") }}" class="nav-link {{ request()->is('admin/calendar') || request()->is('admin/calendar/*') ? 'active' : '' }}">
                     <i class="fa-fw fas fa-calendar nav-icon">
@@ -103,6 +113,15 @@
                     Plan zajęć
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route("admin.ogloszenia.index") }}" class="nav-link {{ request()->is('admin/calendar') || request()->is('admin/calendar/*') ? 'active' : '' }}">
+                    <i class="fa-fw fas fa-calendar nav-icon">
+
+                    </i>
+                    Ogłoszenia
+                </a>
+            </li>
+            
             <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="nav-icon fas fa-fw fa-sign-out-alt">
