@@ -6,11 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Attendance;
+use Illuminate\Support\Facades\DB;
+
+
 class AttendanceController extends Controller
 {
     public function index()
     {
         $users=User::all();
+
+        $users = DB::connection('mysql')->select('SELECT * FROM users');
         return view('admin.attendance.index', compact('users'));
     }
 

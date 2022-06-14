@@ -29,9 +29,7 @@
                         <th>
                             Klasa
                         </th>
-                        <th>
-                            Wychowawca
-                        </th>
+                        
                         <th>
                             Harmonogram
                         </th>
@@ -52,9 +50,7 @@
                             <td>
                                 {{ $schoolClass->name ?? '' }}
                             </td>
-                            <td>
-                                {{ $schollClass->tutor ?? ''}}
-                            </td>
+                            
                             <td>
                                 <a href="{{ route('admin.calendar.index') }}?class_id={{ $schoolClass->id }}">Zobacz harmonogram</a>
                             </td>

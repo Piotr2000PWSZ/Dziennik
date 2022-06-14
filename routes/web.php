@@ -52,6 +52,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('ogloszenia', 'OgloszeniaController');
 
+    Route::get('/insert', 'InsertController@index')->name('sform');
+    Route::post('/create', 'InsertController@store')->name('form create');
+
     //Oceny
 
     Route::resource('oceny', 'OcenyController');

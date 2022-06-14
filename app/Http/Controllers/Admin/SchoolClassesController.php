@@ -10,6 +10,7 @@ use App\SchoolClass;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
 
 class SchoolClassesController extends Controller
 {
@@ -32,6 +33,8 @@ class SchoolClassesController extends Controller
     public function store(StoreSchoolClassRequest $request)
     {
         $schoolClass = SchoolClass::create($request->all());
+
+        
 
         return redirect()->route('admin.school-classes.index');
     }
@@ -63,7 +66,9 @@ class SchoolClassesController extends Controller
     {
         abort_if(Gate::denies('school_class_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $schoolClass->delete();
+        //$schoolClass->delete();
+
+        DB::connection('mysql')->delete(DB::raw("UPDATE school_classes SET deleted_at=NOW() WHERE id= '" . $schoolClass->id . "' ; "));
 
         return back();
     }
@@ -94,4 +99,24 @@ class SchoolClassesController extends Controller
     {
         return $this->roles()->where('id', 4)->exists();
     }
+    public function get_5klasa_Attribute()
+    {
+        return $this->roles()->where('id', 5)->exists();
+    }
+
+    public function get_6klasa_Attribute()
+    {
+        return $this->roles()->where('id', 6)->exists();
+    }
+
+    public function get_7klasa_Attribute()
+    {
+        return $this->roles()->where('id', 7)->exists();
+    }
+
+    public function get8_klasaAttribute()
+    {
+        return $this->roles()->where('id', 8)->exists();
+    }
+
 }

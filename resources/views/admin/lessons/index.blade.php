@@ -49,6 +49,7 @@
                         <th>
                             Przedmiot
                         </th>
+                        
                         <th>
                             &nbsp;
                         </th>
@@ -86,6 +87,7 @@
                             <a class="btn btn-xs btn-primary" href="{{ route('admin.attendance.index', $lesson->id) }}">
                                 Lista obecności
                             </a>
+                            
 
                             
 
@@ -96,6 +98,7 @@
                             <td>
                                 {{ $lesson->przedmiot->nazwa ?? ''}}
                             </td>
+                            
                             <td>
                                 @can('lesson_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.lessons.show', $lesson->id) }}">

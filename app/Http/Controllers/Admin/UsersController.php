@@ -12,6 +12,7 @@ use App\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -85,7 +86,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->delete();
+        DB::connection('mysql')->delete(DB::raw("UPDATE users SET deleted_at=NOW() WHERE id= '" . $user->id . "' ; "));
 
         return back();
     }

@@ -29,6 +29,7 @@ class CalendarService
                         'class_name'   => $lesson->class->name,
                         'teacher_name' => $lesson->teacher->name,
                         'przedmiot_name' => $lesson->przedmiot->nazwa,
+                        'sala_name'     => $lesson->sala_lekcyjna,
                         'rowspan'      => $lesson->difference/30 ?? ''
                     ]);
                 }

@@ -11,6 +11,7 @@ use App\Role;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
 
 class RolesController extends Controller
 {
@@ -72,7 +73,9 @@ class RolesController extends Controller
     {
         abort_if(Gate::denies('role_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $role->delete();
+        //$role->delete();
+
+        DB::connection('mysql')->delete(DB::raw("UPDATE roles SET deleted_at=NOW() WHERE id= '" . $role->id . "' ; "));
 
         return back();
     }

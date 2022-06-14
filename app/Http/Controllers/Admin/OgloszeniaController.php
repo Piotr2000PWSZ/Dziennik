@@ -10,13 +10,16 @@ use App\Http\Requests\StoreOgloszeniaRequest;
 use App\Http\Requests\UpdateOgloszeniaRequest;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
 
 
 class OgloszeniaController extends Controller
 {
     public function index()
     {
-        $ogloszenia = Ogloszenia::all();
+       // $ogloszenia = Ogloszenia::all();
+       $ogloszenia = DB::connection('mysql')->select('SELECT * FROM ogloszenia');
         return view('admin.ogloszenia.index', compact('ogloszenia'));
     }
 

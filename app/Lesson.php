@@ -41,6 +41,17 @@ class Lesson extends Model
         '7' => 'Niedziela',
     ];
 
+
+    public function classLessons()
+    {
+        return $this->hasMany(Lesson::class, 'class_id', 'id');
+    }
+
+    public function classUsers()
+    {
+        return $this->hasMany(User::class, 'class_id', 'id');
+    }
+
     public function getDifferenceAttribute()
     {
         return Carbon::parse($this->end_time)->diffInMinutes($this->start_time);
@@ -81,6 +92,11 @@ class Lesson extends Model
     public function przedmiot()
     {
         return $this->belongsTo(Przedmioty::class, 'przedmiot_id');
+    }
+
+    public function sala_lekcyjna()
+    {
+        return $this->belongsTo(Sala::class, 'id_sali');
     }
 
     public static function isTimeAvailable($weekday, $startTime, $endTime, $class, $teacher, $lesson)

@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    Calendar
+                    Plan zajęć
                 </div>
 
                 <div class="card-body">
@@ -17,7 +17,7 @@
 
                     <table class="table table-bordered">
                         <thead>
-                            <th width="125">Time</th>
+                            <th width="125">Godzina</th>
                             @foreach($weekDays as $day)
                                 <th>{{ $day }}</th>
                             @endforeach
@@ -34,6 +34,7 @@
                                                 {{ $value['class_name'] }}<br>
                                                 Nauczyciel: {{ $value['teacher_name'] }}<br>
                                                 Przedmiot: {{ $value['przedmiot_name'] }}
+                                                
 
                                             </td>
                                         @elseif ($value === 1)

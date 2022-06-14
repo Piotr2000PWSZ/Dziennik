@@ -4,13 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Ogloszenia extends Model
+class Sala extends Model
 {
-    use SoftDeletes;
+    use HasFactory;
 
-    public $table = 'ogloszenia';
+    public $table = 'sale_lekcyjne';
 
     protected $dates = [
         'created_at',
@@ -19,11 +18,8 @@ class Ogloszenia extends Model
     ];
 
     protected $fillable = [
-        'temat',
-        'wiadomosc',
+        'nazwa',
         'updated_at',
         'deleted_at',
     ];
-
-    
 }

@@ -29,6 +29,22 @@ class SchoolClassesTableSeeder extends Seeder
                 'id' => 4,
                 'name' => '4 klasa'
             ],
+            [
+                'id' => 5,
+                'name' => '5 klasa'
+            ],
+            [
+                'id' => 6,
+                'name' => '6 klasa'
+            ],
+            [
+                'id' => 7,
+                'name' => '7 klasa'
+            ],
+            [
+                'id' => 8,
+                'name' => '8 klasa'
+            ],
             
 
         ];

@@ -10,6 +10,7 @@ use App\Lesson;
 use App\SchoolClass;
 use App\User;
 use App\Przedmioty;
+use App\Sala;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,8 +24,14 @@ class LessonsController extends Controller
 
         $lessons = Lesson::all();
         $przedmiot = Przedmioty::all();
+        $schoolClass = SchoolClass::all();   //- Query builder
 
-        return view('admin.lessons.index', compact('lessons', 'przedmiot'));
+        // $lessons = DB::connection('mysql')->select('SELECT * FROM lessons');
+        // $przedmiot = DB::connection('mysql')->select('SELECT * FROM przedmioty');
+        // $schoolClass = DB::connection('mysql')->select('SELECT * FROM school_classes');
+        // RAW
+
+        return view('admin.lessons.index', compact('lessons', 'przedmiot','schoolClass'));
     }
 
     public function create()
@@ -32,14 +39,21 @@ class LessonsController extends Controller
         abort_if(Gate::denies('lesson_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $classes = SchoolClass::all()->pluck('name', 'id')->prepend('Wybierz', '');
+
+        //$classes = DB::connection('mysql')->select('SELECT * FROM school_classes');
+
+        //$schoolClass = DB::connection('mysql')->select('SELECT * FROM school_classes');
+
         $lessons = Lesson::all();
+        //$lessons = DB::connection('mysql')->select('SELECT * FROM lessons');
         $teachers = User::all()->pluck('name', 'id')->prepend('Wybierz', '');
         $przedmioty = Przedmioty::all();
+        $sala_lekcyjna = Sala::all();
 
-        //$teachers = DB::select('SELECT * FROM users u JOIN role_user r ON u.id=r.user_id WHERE r.role_id=3');
-        
+        //$teachers = DB::connection('mysql')->select('SELECT name,id FROM users u JOIN role_user r ON u.id=r.user_id WHERE r.role_id=3');
 
-        return view('admin.lessons.create', compact('classes', 'teachers', 'przedmioty', 'lessons'));
+
+        return view('admin.lessons.create', compact('classes', 'teachers', 'przedmioty', 'lessons', 'sala_lekcyjna'));
     }
 
     public function store(StoreLessonRequest $request)
@@ -59,7 +73,9 @@ class LessonsController extends Controller
 
         $lesson->load('class', 'teacher');
 
-        return view('admin.lessons.edit', compact('classes', 'teachers', 'lesson'));
+        $przedmiot = Przedmioty::all()->pluck('nazwa','id')->prepend('Wybierz', '');
+
+        return view('admin.lessons.edit', compact('classes', 'teachers', 'lesson', 'przedmiot'));
     }
 
     public function update(UpdateLessonRequest $request, Lesson $lesson)
@@ -82,8 +98,20 @@ class LessonsController extends Controller
     {
         abort_if(Gate::denies('lesson_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $lesson->delete();
+        //$lesson->delete();  //--> ORM
 
+        
+
+        
+
+        DB::connection('mysql')->delete(DB::raw("UPDATE lessons SET deleted_at=NOW() WHERE id= '" . $lesson->id . "' ; "));
+
+        //----------> WERSJA RAW
+
+        
+
+
+        
         return back();
     }
 
